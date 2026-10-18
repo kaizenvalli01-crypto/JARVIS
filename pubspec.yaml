@@ -1,0 +1,26 @@
+name: jarvis
+description: JARVIS voice assistant for Windows and Android - time, weather and email, online or offline.
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.8.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  speech_to_text: ^7.5.0
+  flutter_tts: ^4.2.5
+  enough_mail: ^2.1.7
+  flutter_secure_storage: ^11.2.0
+  shared_preferences: ^2.5.6
+  http: ^1.6.0
+  intl: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: any
+
+flutter:
+  uses-material-design: true
