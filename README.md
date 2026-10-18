@@ -89,3 +89,13 @@ Run the tests with `flutter test`.
 2. Global hotkey on Windows (for example Win+J) and an Android home-screen widget
 3. Streaming replies so speech starts sooner
 4. More skills: calendar, reminders, music, smart home
+
+## Get the Windows .exe without installing anything
+
+The project has a GitHub Actions workflow (`.github/workflows/build.yml`) that builds on GitHub's own Windows and Linux machines:
+
+1. Create an empty repository on GitHub and upload this folder to it. You can drag and drop files on the website, or use GitHub Desktop.
+2. Open the repository's **Actions** tab. The **Build JARVIS** workflow runs automatically, or you can click **Run workflow**.
+3. When it finishes (about 10 minutes), open the run and download the artifacts:
+   * **JARVIS-windows**: unzip it and double-click `JARVIS\JARVIS.exe`. Keep the DLLs and the `data` folder next to the exe.
+   * **JARVIS-android**: `JARVIS.apk`, which you can install on your phone.
