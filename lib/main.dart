@@ -117,15 +117,29 @@ class _HomeScreenState extends State<HomeScreen>
       case AssistantState.idle:
         break;
     }
+    if (!_speech.isReady) {
+      _add(_Line(false,
+          'Speech recognition is unavailable (${_speech.lastError ?? 'no engine'}). You can still type to me.'));
+      return;
+    }
     setState(() {
       _state = AssistantState.listening;
       _partial = '';
     });
-    final heard = await _speech.listenOnce(
-      locale: _settings.voiceLocale,
-      preferOnDevice: _settings.preferOnDeviceSpeech,
-      onPartial: (t) => setState(() => _partial = t),
-    );
+    String heard;
+    try {
+      heard = await _speech.listenOnce(
+        locale: _settings.voiceLocale,
+        preferOnDevice: _settings.preferOnDeviceSpeech,
+        onPartial: (t) {
+          if (mounted) setState(() => _partial = t);
+        },
+      );
+    } catch (e) {
+      heard = '';
+      _add(_Line(false, 'I had trouble with the microphone: $e'));
+    }
+    if (!mounted) return;
     setState(() => _partial = '');
     if (heard.trim().isEmpty) {
       setState(() => _state = AssistantState.idle);
